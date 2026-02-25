@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Choix du message</title>
+<style>
+header, footer, header a, header a:visited, header a:link {
+background: blue; color:white;
+}
+</style>
+</head>
+<body>
+<header >
+<a href="/formlamp">creer un effet de lampes</a>
+<a href="/effets">voir tous les effet de lampes</a>
+</header>
+    <h1>🎯 Envoie ton message     &#9728;&#65039;      &#128374;&#65039;</h1>
+    <form method="post">
+<div class="field">
+        <label for="theme">Choisis ton thème :</label>
+        <select name="theme" id="theme">
+            {% for key, val in menu.items() %}
+                <option value="{{ key }}">{{ val.nom }}</option>
+            {% endfor %}
+        </select>
+</div>
+<h3> Des souvenirs plein les valises !     &#129709;     &#129523; </h3>
+<div class="field">
+        <label for="randomlist">message au hasard?</label>
+        <input type="checkbox" value="1" name="randomlist" id="randomlist"/>
+</div>
+<div class="actions">
+        <button type="submit">Lancer</button>
+</div>
+    </form>
+    <form method="post" action="/generer_yaml">
+        <label for="theme">Choisis ton thème :</label>
+        <select name="theme" id="mytheme">
+            {% for key, val in menu.items() %}
+                <option value="{{ val.id }}">{{ val.nom }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">generate yaml pour le nest mini</button>
+    </form>
+
+    {% if message %}
+        <p><strong>{{ message }}</strong></p>
+    {% endif %}
+<h1>📋 messages enregistrés</h1>
+<a href="{{ url_for('new') }}">➕ Ajouter un message</a>
+<ul>
+  {% for s in seances %}
+    <li>
+      <strong>{{ seances[s]['nom'] }}</strong> — {{ seances[s]['lumiere'] }}
+      <a href="{{ url_for('edit', seance_id=seances[s]['id']) }}">✏️ Modifier</a>
+    </li>
+  {% endfor %}
+</ul>
+<footer>
+la compagnie haute en couleurs
+</footer>
+
+
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>envoyer un message</title></head>
+<body>
+<h1>{{ 'éditer' if seance else 'créer' }} un message</h1>
+<form method="post" action="{{ url_for('save') }}">
+  {% if seance %}<input type="hidden" name="id" value="{{ seance[0] }}">{% endif %}
+  <label>Thème: <input name="theme" value="{{ seance[1] if seance else '' }}"></label><br>
+  <label>objet message: <input name="nom" value="{{ seance[2] if seance else '' }}"></label><br>
+  <label>Musique: <input name="musique" value="{{ seance[3] if seance else '' }}"></label><br>
+  <label>Lumière: <input name="lumiere" value="{{ seance[4] if seance else '' }}"></label><br>
+  <label>lieux (like ["a la plage", "neige", "dans la foret"]): <input name="directions" value="{{ seance[5] if seance else '[]' }}"></label><br>
+  <label>expediteur email <input name="expediteur" value="{{ seance[6] if seance else '[]' }}"></label><br>
+  <label>email destinataire: <input name="destinaire" type="text" value="{{ seance[7] if seance else 20 }}"></label><br>
+  <label>content message: <textarea name="contentmessage" value="{{ seance[8] if seance else 10 }}"></textarea></label><br>
+  <button type="submit">envoyer</button>
+</form>
+<a href="/">retour</a>
+
+
+</body>
+</html>
+
